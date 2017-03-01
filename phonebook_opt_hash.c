@@ -4,9 +4,10 @@
 #include <ctype.h>
 
 #include "phonebook_opt_hash.h"
-#define TABLESIZE 3751
+#define TABLESIZE 5393
 
 entry **entryArray=NULL;
+entry **entryArrayHead=NULL;
 unsigned int BKDRHash(char *str)
 {
     unsigned int seed = 131; // 31 131 1313 13131 131313 etc..
@@ -19,7 +20,7 @@ unsigned int BKDRHash(char *str)
 entry *findName(char lastName[], entry *pHead)
 {
     unsigned int hashvalue = BKDRHash(lastName);
-    pHead = *(entryArray+hashvalue);
+    pHead = *(entryArrayHead+hashvalue);
     while (pHead != NULL) {
         if (strcasecmp(lastName, pHead->lastName) == 0)
             return pHead;
@@ -32,11 +33,13 @@ entry *append(char lastName[], entry *e)
 {
     if(entryArray == NULL) {
         entryArray = (entry **)malloc((TABLESIZE+1)*sizeof(entry *));
+        entryArrayHead = (entry **)malloc((TABLESIZE+1)*sizeof(entry *));
     }
     unsigned int hashvalue = BKDRHash(lastName);
     e = *(entryArray+hashvalue);
-    if(e == NULL) {
+    if(*(entryArrayHead+hashvalue) == NULL) {
         e = (entry *) malloc(sizeof(entry));
+        *(entryArrayHead+hashvalue) = e;
     }
     e->pNext = (entry *) malloc(sizeof(entry));
     e = e->pNext;
