@@ -6,6 +6,7 @@
 *.swp
 *.bak
 phonebook_opt
+phonebook_opt_hash
 phonebook_orig
 calculate
 orig.txt
