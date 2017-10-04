@@ -2,7 +2,7 @@
 
 #include "phonebook_opt.h"
 
-/*optimized by reducing struct size*/
+/* TODO: FILL YOUR OWN IMPLEMENTATION HERE! */
 entry *findName(char lastName[], entry *pHead)
 {
     while (pHead != NULL) {
@@ -15,7 +15,7 @@ entry *findName(char lastName[], entry *pHead)
 
 entry *append(char lastName[], entry *e)
 {
-    e->pNext = (entry *) malloc(sizeof(entry));
+    /* TODO: implement */
     e = e->pNext;
     strcpy(e->lastName, lastName);
     e->pNext = NULL;
