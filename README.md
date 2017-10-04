@@ -1,5 +1,5 @@
 # Summary
-
+# This is old version for spring 2017
 * Understand the impact of cache miss
 * Get familiar with the performance analysis tool
 * Realize the software optimizations
