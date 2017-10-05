@@ -94,8 +94,14 @@ int main(int argc, char *argv[])
     printf("execution time of append() : %lf sec\n", cpu_time1);
     printf("execution time of findName() : %.9lf sec\n", cpu_time2);
 
-    if (pHead->pNext) free(pHead->pNext);
-    free(pHead);
+    entry *tmp;
+    while ((tmp = pHead) != NULL) {
+        pHead = pHead->pNext;
+        free(tmp);
+    }
+#ifdef HASH
+    hash_free();
+#endif
 
     return 0;
 }

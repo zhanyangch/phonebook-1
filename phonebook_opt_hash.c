@@ -45,6 +45,22 @@ entry *append(char lastName[], entry *e)
     e = e->pNext;
     strcpy(e->lastName, lastName);
     e->pNext = NULL;
-    *(entryArray+hashvalue) = e;
+    *(entryArray + hashvalue) = e;
     return e;
+}
+
+void hash_free()
+{
+    int i;
+    entry *tmp;
+    entry *pHead;
+    for(i=0; i<TABLESIZE; i++) {
+        pHead=*(entryArrayHead+i);
+        while ((tmp = pHead) != NULL) {
+            pHead = pHead->pNext;
+            free(tmp);
+        }
+    }
+    if(entryArrayHead) free(entryArrayHead);
+    if(entryArray) free(entryArray);
 }
